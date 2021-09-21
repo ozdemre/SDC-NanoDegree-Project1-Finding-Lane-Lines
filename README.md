@@ -32,7 +32,7 @@ In this project, first image processing pipeline developed and applied into seri
 
 
 
-Pipeline is consist of 6 steps:
+Pipeline consist of 6 steps:
 1. Images are converted into gray scale by using `grayscale()` function
 2. Gaussian Smoothing is applied to the image by using `gaussian_blur()` function
 3. Canny Edge Detection is applied for finding the edges by using `canny()` function
@@ -47,12 +47,12 @@ For parameters like, Gaussian blur kernel_size, Canny Edge Detection threshold a
 
 #### 1. Additional Changes on the draw_line() function
 
-Even though pipeline worked well on images some additional change should be made for dotted line cases. For that I used sign changes on slopes for differentiating left (negative) and right lanes (positive). 
+Even though pipeline worked well on images, some additional change should be made for dotted line cases. For that I used sign changes on slopes for differentiating left (negative) and right lanes (positive). 
 Then these points are used for calculating average slope and midpoint on each lane. With those informations left and right lines are plotted from bottom of the image up to region of interest. 
 
 Lastly on additional measurement must be taken for processing video feed. 
-In some of the frames of the video edges are also detected which cause producing NaN x1,x2,y1 and y2 values during Hough Transformation. This cause calculating NaN slope which cannot be converted into int().
-To avoid this simply an if condition is added for skipping those cases.Here is the modified `draw_lines()` function.
+In some frames of the video, edges are also detected which cause producing NaN x1,x2,y1 and y2 values during Hough Transformation. This cause calculating NaN slope which cannot be converted into int().
+To avoid this, simply an if condition is added for skipping those cases. Here is the modified `draw_lines()` function.
 
 ```python
 def draw_lines(img, lines, color=[255, 0, 0], thickness=2):
@@ -144,13 +144,6 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=2):
     x2_right_n = int(x_right_ave - ((y_right_ave-350)/right_ave_slope))
     cv2.line(img, (x1_right_n, 540), (x2_right_n, 350), color=[0, 0, 255], thickness=10)  
 ```
-
-
-
- 
-
-![alt text][image1]
-
 
 ### 2. Identify potential shortcomings with your current pipeline
 
